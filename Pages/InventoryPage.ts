@@ -1,7 +1,7 @@
 import { Locator, Page } from "playwright";
 import { Browser,expect} from '@playwright/test'
 import { BasePage } from "./BasePage";
-import {Globals} from "../Global";
+
 
 
 
