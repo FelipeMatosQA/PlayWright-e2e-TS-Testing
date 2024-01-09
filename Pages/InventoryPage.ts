@@ -1,6 +1,7 @@
 import { Locator, Page } from "playwright";
-import { Browser,expect} from '@playwright/test'
+import {expect} from '@playwright/test'
 import { BasePage } from "./BasePage";
+const systemURL = require("../fixtures/systemURL.json")
 
 
 
@@ -14,6 +15,7 @@ export class InventoryPage extends BasePage{
     readonly linkedinLink: Locator
     readonly facebookLink: Locator
     readonly cartLink: Locator
+    readonly itemBadgeCounter : Locator
     
     
 
@@ -24,6 +26,7 @@ export class InventoryPage extends BasePage{
         this.linkedinLink = page.locator(".social").getByText("LinkedIn")
         this.facebookLink = page.locator(".social").getByText("Facebook")
         this.cartLink = page.locator(".shopping_cart_link")
+        this.itemBadgeCounter = page.locator(".shopping_cart_badge")
         
     }
 
@@ -41,7 +44,7 @@ export class InventoryPage extends BasePage{
     async selectItemByIndex({page},index: number){
         
         const itemContainer = page.locator(`//div[@class="inventory_list"]/div[${index}]`)
-        const price = await itemContainer.locator('//div[@class="inventory_item_price"]').textContent()
+        const price = await itemContainer.locator('.inventory_item_price').textContent()
         const name =  await itemContainer.locator('.inventory_item_name').textContent() 
         const addToCartBtn = itemContainer.getByRole('button')
         await addToCartBtn.click()
@@ -50,16 +53,18 @@ export class InventoryPage extends BasePage{
 
     async navigateToCart({page}){
         await this.cartLink.click()
-        expect(page.url()).toEqual("https://www.saucedemo.com/cart.html") 
+        await this.waitForNetwork({page})
+        await this.validadeCurrentUrl({page},systemURL.cart)
+         
     }
 
-    async getNumberOfItensInTheCart({page}){
-        const numeroNocarrinho = await page.locator(".shopping_cart_badge").textContent()
-        return numeroNocarrinho
+    async getNumberOfItensInTheCart(){
+        const numberOfItens = await this.itemBadgeCounter.textContent()
+        return numberOfItens
     }
 
     async validateSucessfullLogin({page}){
-        await this.validadeCurrentUrl({page},"https://www.saucedemo.com/inventory.html")
+        await this.validadeCurrentUrl({page},systemURL.inventory)
         await expect(this.headerLogo).toBeVisible()
     }
 

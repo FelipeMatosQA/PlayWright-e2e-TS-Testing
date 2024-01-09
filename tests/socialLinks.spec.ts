@@ -12,7 +12,7 @@ test("click on twitter", async ({browser})=>{
     const page = await context.newPage()
     const pm = new PageManager(page)
 
-    await page.goto("https://www.saucedemo.com/")
+    await page.goto("/")
     pm.onLoginPage().performLogin(users.standard,users.password)
     pm.onInvetoryPage().validateSucessfullLogin({page})
     
@@ -33,7 +33,7 @@ test("click on LINKEDIN", async ({browser})=>{
     const page = await context.newPage()
     const pm = new PageManager(page)
 
-    await page.goto("https://www.saucedemo.com/")
+    await page.goto("/")
     pm.onLoginPage().performLogin(users.standard,users.password)
     pm.onInvetoryPage().validateSucessfullLogin({page})
     
@@ -56,7 +56,7 @@ test("click on Facebook", async ({browser})=>{
     
 
 
-    await page.goto("https://www.saucedemo.com/")
+    await page.goto("/")
     pm.onLoginPage().performLogin(users.standard,users.password)
     pm.onInvetoryPage().validateSucessfullLogin({page})
     

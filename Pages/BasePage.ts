@@ -6,29 +6,34 @@ import { expect} from '@playwright/test'
 export class BasePage{
 
     readonly page: Page
+    
 
     constructor(page: Page){//Construtor que recebe a page
         this.page = page
+        
     }
     
 
-    async waitForNumberOfSeconds(timeInSeconds: number){
-        await this.page.waitForTimeout(timeInSeconds * 1000)
+    async waitForNumberOfSeconds({page},timeInSeconds: number){
+        await page.waitForTimeout(timeInSeconds * 1000)
+    }
+    async waitForNetwork({page}){
+        await page.waitForLoadState('networkidle')
     }
 
-    async findElement(element){
-        return await this.page.locator(element)
-    }
+    
 
-    async visitDefaultUrl(){
-        await this.page.goto('https://demoqa.com/')
-    }
+    
 
     async validadeCurrentUrl({page},url: string){
 
         await page.waitForURL(url)
         expect(page.url()).toBe(url)
+    }
 
+    async convertStringToNumber(value){
+        const digits = value.replace(/[^\d\-.]/g, ""); 
+        return Number(digits);
     }
 
 
