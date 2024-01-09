@@ -6,7 +6,7 @@ const users = require("../fixtures/users.json")
 
 test.beforeEach("Visit URL",async({page})=>{
     const pm = new PageManager(page)
-    await page.goto("https://www.saucedemo.com/")
+    await page.goto("/")
     await pm.onLoginPage().performLogin(users.standard,users.password)
     await pm.onInvetoryPage().validateSucessfullLogin({page})
 })
