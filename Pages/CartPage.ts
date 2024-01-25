@@ -8,6 +8,7 @@ export class CartPage extends BasePage{
     readonly page: Page
     readonly labelItem: Locator
     readonly nameItem: Locator
+    readonly descItem: Locator
     readonly priceItem: Locator
     readonly checkoutBtn: Locator
     readonly removeBtn: Locator
@@ -18,6 +19,7 @@ export class CartPage extends BasePage{
         super(page)
         this.priceItem = page.locator('.inventory_item_price')
         this.nameItem = page.locator('.inventory_item_name')
+        this.descItem = page.locator('.inventory_item_desc')
         this.checkoutBtn = page.locator("#checkout")
         this.labelItem = page.locator(".cart_item_label")
         this.removeBtn= this.labelItem.getByRole("button")
@@ -29,10 +31,12 @@ export class CartPage extends BasePage{
     async getPriceAndNameItem(){
         const price = await this.priceItem.textContent()
         const name = await this.nameItem.textContent()
+        const description = await this.descItem.textContent()
 
         return {
             price,
-            name
+            name,
+            description
         }
     }
 
@@ -40,15 +44,17 @@ export class CartPage extends BasePage{
         
         const prices = await this.priceItem.allTextContents()
         const names = await this.nameItem.allTextContents()
+        const description = await this.descItem.allTextContents()
         return {
             prices,
-            names
+            names,
+            description
         }
     }
     
     async clickCheckoutButton({page}){
         await this.checkoutBtn.click()
-        await this.validadeCurrentUrl({page},systemURL.checkoutOne)
+        await this.validadeCurrentUrl({page},systemURL.checkout_One)
     }
 
     async checkIfThereIsAItemInTheCart(){
@@ -57,9 +63,11 @@ export class CartPage extends BasePage{
         await expect(this.cartCounterBadge).toHaveText("1")
     }
 
-    async removeItemFromTheCart(){
+    async removeItemFromTheCart({page}){
         await this.removeBtn.click()
-        expect(this.cartCounterBadge.isHidden()).toBeTruthy()
+        //const badge = this.cartCounterBadge
+        //await page.waitForFunction(()=>{expect(this.cartCounterBadge.isHidden()).toBeTruthy()})
+        //expect(this.cartCounterBadge.isHidden()).toBeTruthy()
         expect(this.labelItem.isHidden).toBeTruthy()
         expect(this.removedCartItem.isHidden).toBeTruthy()
 

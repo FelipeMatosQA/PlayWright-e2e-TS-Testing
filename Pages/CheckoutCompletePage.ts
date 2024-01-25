@@ -1,6 +1,6 @@
 import { Locator, Page,expect ,ElementHandle} from "@playwright/test";
 import { BasePage } from "./BasePage";
-
+const msg = require("../fixtures/systemMessages.json")
 export class CheckoutCompletePage extends BasePage{
     readonly page: Page
     readonly image: Locator
@@ -19,10 +19,10 @@ export class CheckoutCompletePage extends BasePage{
     async validateCheckout(){
 
         await expect(this.title).toBeVisible()
-        await expect(this.title).toHaveText("Checkout: Complete!")
+        await expect(this.title).toHaveText(msg.checkoutCompleteTitle)
         await expect(this.image).toBeVisible()
-        await expect(this.orderMsgHeader).toHaveText("Thank you for your order!")
-        await expect(this.orderMsgBody).toHaveText("Your order has been dispatched, and will arrive just as fast as the pony can get there!")
+        await expect(this.orderMsgHeader).toHaveText(msg.sucessfullOrderHeader)
+        await expect(this.orderMsgBody).toHaveText(msg.sucessfullOrderBody)
     }    
         
 }

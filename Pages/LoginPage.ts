@@ -1,6 +1,7 @@
 import { Locator, Page } from "playwright";
 import { expect} from '@playwright/test'
 import { BasePage } from "./BasePage";
+const msg = require("../fixtures/systemMessages.json")
 
 
 export class LoginPage extends BasePage{
@@ -30,7 +31,7 @@ export class LoginPage extends BasePage{
 
     async validateLockedLogin(){
         await expect(this.errorMessage)
-            .toContainText("Epic sadface: Sorry, this user has been locked out.")
+            .toContainText(msg.locked_User)
     }
 
     

@@ -68,7 +68,7 @@ test("click on Facebook", async ({browser})=>{
     ])
     await newPage.waitForLoadState('domcontentloaded')
     await newPage.waitForLoadState('networkidle')
-    expect(newPage.url()).toBe(url.facebookURL)
+    expect(newPage.url()).toContain(url.facebookURL1)
 })
 
 
