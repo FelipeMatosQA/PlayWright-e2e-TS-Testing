@@ -37,7 +37,7 @@ test('Validate that multiples itens has been addicioned to the cart', async ({pa
 
 test('Validate if the cart icon counter is counting correctly the numbers of itens added to cart', async ({page})=>{
     const pm = new PageManager(page)
-
+    
     await pm.onInvetoryPage().selectItemByIndex({page},1)
     await pm.onInvetoryPage().selectItemByIndex({page},2)
     expect( await pm.onInvetoryPage().getNumberOfItensInTheCart()).toEqual("2")
@@ -52,6 +52,6 @@ test("Validate if the item has been removed from the cart after click 'Remove' b
     await pm.onInvetoryPage().selectItemByIndex({page},1)
     await pm.onInvetoryPage().navigateToCart({page})
     await pm.onCartPage().checkIfThereIsAItemInTheCart()
-    await pm.onCartPage().removeItemFromTheCart()
+    await pm.onCartPage().removeItemFromTheCart({page})
 
 })

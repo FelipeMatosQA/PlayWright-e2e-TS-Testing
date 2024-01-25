@@ -30,6 +30,6 @@ export class CheckoutTwoPage extends BasePage{
     async clickFinishButton({page}){
         await this.finishBtn.click()
         await this.waitForNetwork({page})
-        await this.validadeCurrentUrl({page},systemURL.checkoutComplete)
+        await this.validadeCurrentUrl({page},systemURL.checkout_Complete)
     }
 }

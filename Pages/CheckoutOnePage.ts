@@ -34,7 +34,7 @@ export class CheckoutOnePage extends BasePage{
 
     async clickCountinueToCheckoutTwo({page}){
         await this.continueBtn.click()
-        await this.validadeCurrentUrl({page},systemURL.checkoutTwo)
+        await this.validadeCurrentUrl({page},systemURL.checkout_Two)
         
 
     }

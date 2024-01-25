@@ -7,13 +7,11 @@ export class BasePage{
 
     readonly page: Page
     
-
-    constructor(page: Page){//Construtor que recebe a page
+    constructor(page: Page){
         this.page = page
         
     }
     
-
     async waitForNumberOfSeconds({page},timeInSeconds: number){
         await page.waitForTimeout(timeInSeconds * 1000)
     }
@@ -21,14 +19,10 @@ export class BasePage{
         await page.waitForLoadState('networkidle')
     }
 
-    
-
-    
-
     async validadeCurrentUrl({page},url: string){
 
-        await page.waitForURL(url)
-        expect(page.url()).toBe(url)
+        await this.waitForNetwork({page})
+        expect(page.url()).toContain(url)
     }
 
     async convertStringToNumber(value){
@@ -38,5 +32,5 @@ export class BasePage{
 
 
 
-    //demais métodos da base page aqui
+   
 }

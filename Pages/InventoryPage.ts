@@ -4,9 +4,6 @@ import { BasePage } from "./BasePage";
 const systemURL = require("../fixtures/systemURL.json")
 
 
-
-
-
 export class InventoryPage extends BasePage{
 
     readonly page: Page
@@ -16,6 +13,7 @@ export class InventoryPage extends BasePage{
     readonly facebookLink: Locator
     readonly cartLink: Locator
     readonly itemBadgeCounter : Locator
+    readonly item1link: Locator
     
     
 
@@ -27,6 +25,7 @@ export class InventoryPage extends BasePage{
         this.facebookLink = page.locator(".social").getByText("Facebook")
         this.cartLink = page.locator(".shopping_cart_link")
         this.itemBadgeCounter = page.locator(".shopping_cart_badge")
+        this.item1link = page.locator("#item_4_img_link")
         
     }
 
@@ -46,9 +45,10 @@ export class InventoryPage extends BasePage{
         const itemContainer = page.locator(`//div[@class="inventory_list"]/div[${index}]`)
         const price = await itemContainer.locator('.inventory_item_price').textContent()
         const name =  await itemContainer.locator('.inventory_item_name').textContent() 
+        const description =  await itemContainer.locator('.inventory_item_desc').textContent()
         const addToCartBtn = itemContainer.getByRole('button')
         await addToCartBtn.click()
-        return {price,name}
+        return {price,name,description}
     }
 
     async navigateToCart({page}){
@@ -66,6 +66,11 @@ export class InventoryPage extends BasePage{
     async validateSucessfullLogin({page}){
         await this.validadeCurrentUrl({page},systemURL.inventory)
         await expect(this.headerLogo).toBeVisible()
+    }
+
+    async accessInvetoryOfItem1({page}){
+        await this.item1link.click()
+        await this.validadeCurrentUrl({page},systemURL.product_Inventory)
     }
 
 
