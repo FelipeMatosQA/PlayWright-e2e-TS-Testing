@@ -1,7 +1,7 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, pipeline ]
   pull_request:
     branches: [ main, master ]
 jobs:
@@ -11,6 +11,13 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        distribution: zulu
+        java-version: 17
+
     - uses: actions/setup-node@v3
       with:
         node-version: 20
@@ -34,6 +41,7 @@ jobs:
     - name: Build test report
       uses: simple-elf/allure-report-action@v1.7
       if: always()
+      id: allure-report
       with:
         gh_pages: gh-pages
         allure_history: allure-history
