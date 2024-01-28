@@ -37,6 +37,8 @@ jobs:
       with:
         ref: gh-pages
         path: gh-pages
+    
+    - name: server alure
       run: npx allure serve allure-results
 
 
