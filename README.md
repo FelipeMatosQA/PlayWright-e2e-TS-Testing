@@ -12,9 +12,9 @@ To clone this project from Github, run these commands:
 
 ```bash
 ## Clone this repository to a local directory.
-git clone https://github.com/FelipeMatosQA/PlayWright-e2e.git
+git clone https://github.com/FelipeMatosQA/PlayWright-e2e-TS-Testing.git
 ## Enter in the project folder
-cd PlayWright-e2e
+cd PlayWright-e2e-TS-Testing
 ## Install the node modules
 npm install
 ## Install playwright globally
@@ -30,7 +30,7 @@ npx playwright test
 Was configured an execution pipeline using GitHub Actions, if you want to see the complete workflow you must navigate to the session "Actions" of this repository or click this link " https://github.com/FelipeMatosQA/PlayWright-e2e/actions ". You can see the pipeline workflow
 in the image below:
 
-![workflows](https://github.com/FelipeMatosQA/PlayWright-e2e/assets/121990373/4000b290-bdb0-4d38-afb8-5c86fdc37980)
+![workflows](https://github.com/FelipeMatosQA/PlayWright-e2e-TS-Testing/assets/121990373/4000b290-bdb0-4d38-afb8-5c86fdc37980)
 
 After each execution, the report artifact is deployed to GitHub Pages, and you just have to click at the appointed place to see the entire data of the execution on an HTML page. In the examples below you can see that all the tests have passed.
 ## GitHub Pages artifact deployment 
